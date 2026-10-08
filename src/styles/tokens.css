@@ -1,0 +1,243 @@
+/*
+  Dcyde design tokens: colors, elevation and motion.
+
+  Two layers:
+  1. Primitives (--p-*): the raw palette. Components never use these.
+  2. Semantic (--color-*, --elevation-*, --duration-*): what a value is for.
+     Components use only these, through the Tailwind classes set up in theme.css.
+
+  Sizes, radius, type and easing do not change between themes, so they live
+  in theme.css with the rest of the Tailwind theme.
+
+  Light is the default. Set data-theme="dark" (or "light") on any element to
+  switch everything inside it. Text pairs pass WCAG AA (4.5:1). Borders and
+  icons that identify a control pass 3:1. Foundations/Colors measures them live.
+*/
+
+/* ---------- Primitives ---------- */
+
+:root {
+  /* Neutrals, light */
+  --p-white: #ffffff;
+  --p-slate-25: #f7f9fc;
+  --p-slate-50: #f4f7fc;
+  --p-slate-100: #e4e9f0;
+  --p-slate-200: #d3dae5;
+  --p-slate-400: #7d8797;
+  --p-slate-500: #646f80;
+  --p-slate-600: #586374;
+  --p-slate-700: #434d61;
+  --p-slate-900: #16202e;
+
+  /* Neutrals, dark */
+  --p-ink-950: #181820;
+  --p-ink-925: #1a1e2a;
+  --p-ink-900: #1e2230;
+  --p-ink-850: #262b3b;
+  --p-ink-800: #2b3142;
+  --p-ink-300: #9494a3;
+  --p-ink-200: #a3a3b0;
+  --p-ink-50: #ececef;
+
+  /* Blue */
+  --p-blue-50: #eaf1ff;
+  --p-blue-200: #86b3ff;
+  --p-blue-300: #80a4ff;
+  --p-blue-400: #6ea3ff;
+  --p-blue-600: #2563eb;
+  --p-blue-700: #1d50d8;
+  --p-blue-900: #11317a;
+
+  /* Yellow */
+  --p-yellow-400: #ffcb2e;
+  --p-yellow-950: #20180a;
+
+  /* Red */
+  --p-red-50: #fdecec;
+  --p-red-300: #ff7a7f;
+  --p-red-350: #ff8589;
+  --p-red-400: #ff6b70;
+  --p-red-500: #e5484d;
+  --p-red-600: #c52f35;
+  --p-red-700: #c13434;
+
+  /* Green */
+  --p-green-50: #e7f7ef;
+  --p-green-300: #6cc98a;
+  --p-green-500: #1f9d5c;
+  --p-green-700: #0f7a4a;
+
+  /* Amber */
+  --p-amber-300: #d4b955;
+  --p-amber-600: #b58a0a;
+
+  /* Tag hues */
+  --p-violet-200: #b0a4e0;
+  --p-violet-500: #6d5bd0;
+  --p-teal-200: #7ac4c0;
+  --p-teal-500: #2b8f8a;
+  --p-ochre-200: #c8b473;
+  --p-ochre-500: #a8820f;
+  --p-purple-200: #c08ad0;
+  --p-purple-500: #9a55b8;
+  --p-sky-200: #7aafda;
+  --p-sky-500: #3a78bd;
+
+  /* Avatar fills (white text passes AA on all four, in both themes) */
+  --p-avatar-violet: #5b21b6;
+  --p-avatar-teal: #115e59;
+  --p-avatar-amber: #92400e;
+  --p-avatar-rose: #9f1239;
+
+  /* ---------- Motion and layering (same in both themes) ---------- */
+
+  --duration-fast: 120ms;
+  --duration-base: 160ms;
+  --duration-slow: 280ms;
+
+  --z-sticky: 5;
+  --z-popover: 50;
+  --z-dialog: 60;
+  --z-toast: 70;
+}
+
+/* ---------- Semantic, light theme (default) ---------- */
+
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+
+  --color-bg: var(--p-slate-50);
+  --color-surface: var(--p-white);
+  --color-surface-sunken: var(--p-slate-25);
+  --color-surface-raised: var(--p-white);
+  --color-surface-hover: rgba(16, 32, 72, 0.05);
+  --color-overlay: rgba(10, 16, 32, 0.45);
+
+  --color-border: var(--p-slate-100);
+  --color-border-strong: var(--p-slate-200);
+  --color-border-input: var(--p-slate-400);
+
+  --color-text: var(--p-slate-900);
+  --color-text-secondary: var(--p-slate-600);
+  --color-text-muted: var(--p-slate-500);
+  --color-text-on-solid: var(--p-white);
+
+  --color-accent: var(--p-blue-600);
+  --color-accent-solid: var(--p-blue-600);
+  --color-accent-solid-hover: var(--p-blue-700);
+  --color-accent-subtle: var(--p-blue-50);
+  --color-accent-subtle-text: var(--p-blue-900);
+  --color-focus-ring: var(--p-blue-600);
+
+  --color-danger: var(--p-red-700);
+  --color-danger-solid: var(--p-red-600);
+  --color-danger-subtle: var(--p-red-50);
+  --color-success: var(--p-green-700);
+  --color-success-subtle: var(--p-green-50);
+  --color-highlight: var(--p-yellow-400);
+  --color-highlight-text: var(--p-yellow-950);
+  --color-favorite: var(--p-red-500);
+
+  /* The dark action rail on each decision card */
+  --color-rail: var(--p-slate-700);
+  --color-rail-icon: rgba(255, 255, 255, 0.75);
+  --color-rail-icon-hover: var(--p-white);
+  --color-rail-hover: rgba(255, 255, 255, 0.12);
+  --color-rail-favorite: var(--p-red-300);
+  --color-rail-pinned: var(--p-yellow-400);
+  --color-rail-following: var(--p-blue-300);
+
+  /* Vote result bar */
+  --color-vote-aligned: var(--p-green-500);
+  --color-vote-not: var(--p-red-500);
+  --color-vote-abstain: var(--p-slate-200);
+
+  /* Tag and priority dots (3:1 against the surface) */
+  --color-tag-1: var(--p-violet-500);
+  --color-tag-2: var(--p-teal-500);
+  --color-tag-3: var(--p-ochre-500);
+  --color-tag-4: var(--p-purple-500);
+  --color-tag-5: var(--p-sky-500);
+  --color-priority-low: var(--p-green-500);
+  --color-priority-medium: var(--p-amber-600);
+  --color-priority-high: var(--p-red-500);
+
+  --color-avatar-1: var(--p-avatar-violet);
+  --color-avatar-2: var(--p-avatar-teal);
+  --color-avatar-3: var(--p-avatar-amber);
+  --color-avatar-4: var(--p-avatar-rose);
+
+  --elevation-sm: 0 1px 2px rgba(16, 32, 72, 0.06), 0 1px 3px rgba(16, 32, 72, 0.07);
+  --elevation-md: 0 4px 12px rgba(16, 32, 72, 0.08), 0 12px 28px rgba(16, 32, 72, 0.08);
+  --elevation-lg: 0 12px 28px rgba(16, 32, 72, 0.1), 0 30px 60px rgba(16, 32, 72, 0.12);
+}
+
+/* ---------- Semantic, dark theme ---------- */
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-bg: var(--p-ink-950);
+  --color-surface: var(--p-ink-900);
+  --color-surface-sunken: var(--p-ink-925);
+  --color-surface-raised: var(--p-ink-850);
+  --color-surface-hover: rgba(255, 255, 255, 0.06);
+  --color-overlay: rgba(0, 0, 0, 0.6);
+
+  --color-border: rgba(255, 255, 255, 0.09);
+  --color-border-strong: rgba(255, 255, 255, 0.16);
+  --color-border-input: rgba(255, 255, 255, 0.35);
+
+  --color-text: var(--p-ink-50);
+  --color-text-secondary: var(--p-ink-200);
+  --color-text-muted: var(--p-ink-300);
+
+  --color-accent: var(--p-blue-400);
+  --color-accent-subtle: rgba(110, 163, 255, 0.14);
+  --color-accent-subtle-text: var(--p-blue-200);
+  --color-focus-ring: var(--p-blue-400);
+
+  --color-danger: var(--p-red-350);
+  --color-danger-subtle: rgba(255, 107, 112, 0.14);
+  --color-success: var(--p-green-300);
+  --color-success-subtle: rgba(108, 201, 138, 0.14);
+  --color-favorite: var(--p-red-400);
+
+  --color-rail: var(--p-ink-800);
+
+  --color-vote-aligned: var(--p-green-300);
+  --color-vote-not: var(--p-red-400);
+  --color-vote-abstain: rgba(255, 255, 255, 0.2);
+
+  --color-tag-1: var(--p-violet-200);
+  --color-tag-2: var(--p-teal-200);
+  --color-tag-3: var(--p-ochre-200);
+  --color-tag-4: var(--p-purple-200);
+  --color-tag-5: var(--p-sky-200);
+  --color-priority-low: var(--p-green-300);
+  --color-priority-medium: var(--p-amber-300);
+  --color-priority-high: var(--p-red-400);
+
+  --elevation-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --elevation-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --elevation-lg: 0 16px 48px rgba(0, 0, 0, 0.5), 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-slow: 0ms;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "header": {
+    "newDecision": "New decision",
+    "editDecision": "Edit decision",
+    "post": "Post",
+    "posting": "Posting...",
+    "saveChanges": "Save changes",
+    "saving": "Saving..."
+  },
+  "fields": {
+    "titleLabel": "Title",
+    "titlePlaceholder": "e.g. {{example}}",
+    "titleRequired": "Add a title so the team can find this decision.",
+    "contextLabel": "Context",
+    "contextPlaceholder": "e.g. {{example}}",
+    "contextRequired": "Add a line on why. It is what people search for later.",
+    "linkTip": "Tip: write [label](url) to make a link clickable.",
+    "charCount": "{{current}} of {{max}} characters",
+    "scopeLabel": "Scope",
+    "addScope": "Add scope",
+    "responsibleLabel": "Owners",
+    "addResponsible": "Add owner",
+    "linksLabel": "Links",
+    "addLink": "Add",
+    "linksPlaceholder": "Paste a link (Jira, Confluence, Docs...)",
+    "linkInvalid": "That doesn't look like a web address. Check it and try again.",
+    "scopeLimit": "You can add up to {{count}} scopes.",
+    "ownerLimit": "You can add up to {{count}} owners.",
+    "linkLimit": "You can add up to {{count}} links.",
+    "required": "required"
+  },
+  "submitError": "The decision wasn't saved. Check your connection and try again. Your text is still here.",
+  "discard": {
+    "title": "Discard this draft?",
+    "message": "Your title, context and other fields will be cleared. You can't get them back.",
+    "confirm": "Discard",
+    "keep": "Keep editing"
+  },
+  "responsiblePicker": {
+    "title": "Add owners",
+    "search": "Search members",
+    "empty": "No members match that name.",
+    "done": "Done ({{count}} selected)",
+    "doneEmpty": "Done",
+    "you": "{{name}} (you)"
+  },
+  "scopePicker": {
+    "title": "Select scopes",
+    "search": "Search or type a new scope",
+    "createScope": "Create \"{{query}}\"",
+    "empty": "No scopes match."
+  },
+  "alignment": {
+    "toggleLabel": "Ask for alignment",
+    "toggleDetail": "Get a team signal on this decision",
+    "votingWindow": "Voting window",
+    "day_one": "{{count}} day",
+    "day_other": "{{count}} days"
+  },
+  "placeholders": [
+    {
+      "title": "We're using Tailwind instead of styled-components",
+      "context": "Faster prototyping, the team already knows it, smaller bundle"
+    },
+    {
+      "title": "API pagination will use cursors, not offsets",
+      "context": "Better performance at scale, no skipped items when data changes"
+    },
+    {
+      "title": "Onboarding checklist replaces the product tour",
+      "context": "Few people finished the tour. A checklist lets them go at their own pace"
+    },
+    {
+      "title": "Mobile-first design for all new pages",
+      "context": "Most traffic is mobile, and desktop layouts adapt more easily than the reverse"
+    },
+    {
+      "title": "No custom date picker, we use the native input",
+      "context": "Saves two weeks of work, and native pickers are good enough now"
+    },
+    {
+      "title": "Pricing page shows annual billing by default",
+      "context": "Most customers pick annual anyway, monthly stays one click away"
+    },
+    {
+      "title": "Ship weekly instead of every two weeks",
+      "context": "Smaller releases, faster feedback, easier rollbacks"
+    },
+    {
+      "title": "Design tokens live in CSS custom properties",
+      "context": "No runtime cost, no flash of unstyled content, simpler theming"
+    }
+  ]
+}

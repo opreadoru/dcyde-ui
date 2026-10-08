@@ -1,0 +1,16 @@
+{
+  "actions": {
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "close": "Close",
+    "working": "Working...",
+    "remove": "Remove {{name}}",
+    "typeToConfirm": "Type {{value}} to confirm"
+  },
+  "mentions": {
+    "listLabel": "People to mention",
+    "everyone": "Everyone in the room",
+    "count_one": "{{count}} person matches. Use the arrow keys, then Enter to insert.",
+    "count_other": "{{count}} people match. Use the arrow keys, then Enter to insert."
+  }
+}

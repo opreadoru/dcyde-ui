@@ -1,0 +1,79 @@
+{
+  "loading": "Loading decisions",
+  "loadingMore": "Loading...",
+  "empty": {
+    "noDecisions": {
+      "heading": "No decisions yet",
+      "subtext": "Decisions your team records will show up here."
+    },
+    "noFavorites": {
+      "heading": "No favorites yet",
+      "subtext": "Use the heart on a decision to keep it here."
+    },
+    "noResults": {
+      "heading": "No decisions match",
+      "subtext": "Try other keywords or remove a filter."
+    }
+  },
+  "timeGroup": {
+    "earlier": "Earlier",
+    "important": "Important"
+  },
+  "favoritesActive": "Showing favorites only",
+  "showAllDecisions": "Show all",
+  "markAllRead": "Mark all read ({{count}})",
+  "loadMore": "Load more",
+  "showMore": "Show more ({{count}} remaining)",
+  "card": {
+    "unknownAuthor": "Unknown",
+    "edited": "edited",
+    "voteNeeded": "Vote",
+    "showDetails": "Show details",
+    "hideDetails": "Hide details",
+    "actionsLabel": "Decision actions",
+    "tagsLabel": "Scopes",
+    "sourceLabel": "Source",
+    "responsible": "Owners",
+    "linksLabel": "Links",
+    "alignmentLabel": "Alignment",
+    "sentFrom": "Sent from {{source}}",
+    "alignment": {
+      "aligned": "Aligned",
+      "notAligned": "Not aligned",
+      "votingClosed": "Voting closed",
+      "waiting": "Waiting for team input ({{voted}}/{{eligible}} voted)",
+      "alignedCount": "{{count}} aligned",
+      "notAlignedCount": "{{count}} not aligned"
+    },
+    "actions": {
+      "copyLink": "Copy link",
+      "linkCopied": "Link copied",
+      "editDecision": "Edit decision",
+      "deleteDecision": "Delete decision",
+      "follow": "Follow {{name}}",
+      "favorite": "Favorite",
+      "pin": "Pin to top"
+    },
+    "sources": {
+      "figmaPage": "Figma page",
+      "figmaFile": "Figma file"
+    },
+    "deleteModal": {
+      "title": "Delete decision",
+      "message": "\"{{title}}\" will be removed for everyone in the room. You can't undo this.",
+      "confirm": "Delete"
+    },
+    "unread": "Unread",
+    "pinned": "Pinned",
+    "scopeTooltip": {
+      "follow": "Follow",
+      "unfollow": "Unfollow"
+    }
+  },
+  "error": {
+    "heading": "Decisions didn't load",
+    "subtext": "Check your connection and try again.",
+    "retry": "Try again"
+  },
+  "feedLabel": "Decisions"
+}

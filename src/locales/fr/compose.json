@@ -1,0 +1,94 @@
+{
+  "header": {
+    "newDecision": "Nouvelle décision",
+    "editDecision": "Modifier la décision",
+    "post": "Publier",
+    "posting": "Publication…",
+    "saveChanges": "Enregistrer les modifications",
+    "saving": "Enregistrement…"
+  },
+  "fields": {
+    "titleLabel": "Titre",
+    "titlePlaceholder": "ex. {{example}}",
+    "titleRequired": "Ajoutez un titre pour que l'équipe retrouve cette décision.",
+    "contextLabel": "Contexte",
+    "contextPlaceholder": "ex. {{example}}",
+    "contextRequired": "Ajoutez une ligne sur le pourquoi. C'est ce que l'on cherche plus tard.",
+    "linkTip": "Astuce : écrivez [libellé](url) pour rendre un lien cliquable.",
+    "charCount": "{{current}} sur {{max}} caractères",
+    "scopeLabel": "Scope",
+    "addScope": "Ajouter un scope",
+    "responsibleLabel": "Référents",
+    "addResponsible": "Ajouter un référent",
+    "linksLabel": "Liens",
+    "addLink": "Ajouter",
+    "linksPlaceholder": "Collez un lien (Jira, Confluence, Docs…)",
+    "linkInvalid": "Cette adresse ne semble pas valide. Vérifiez-la et réessayez.",
+    "scopeLimit": "Vous pouvez ajouter jusqu'à {{count}} scopes.",
+    "ownerLimit": "Vous pouvez ajouter jusqu'à {{count}} référents.",
+    "linkLimit": "Vous pouvez ajouter jusqu'à {{count}} liens.",
+    "required": "obligatoire"
+  },
+  "submitError": "La décision n'a pas été enregistrée. Vérifiez votre connexion et réessayez. Votre texte est toujours là.",
+  "discard": {
+    "title": "Abandonner ce brouillon ?",
+    "message": "Le titre, le contexte et les autres champs seront effacés. Vous ne pourrez pas les récupérer.",
+    "confirm": "Abandonner",
+    "keep": "Continuer"
+  },
+  "responsiblePicker": {
+    "title": "Ajouter des référents",
+    "search": "Rechercher des membres",
+    "empty": "Aucun membre ne porte ce nom.",
+    "done": "Terminé ({{count}} sélectionné(s))",
+    "doneEmpty": "Terminé",
+    "you": "{{name}} (vous)"
+  },
+  "scopePicker": {
+    "title": "Sélectionner des scopes",
+    "search": "Rechercher ou saisir un nouveau scope",
+    "createScope": "Créer « {{query}} »",
+    "empty": "Aucun scope ne correspond."
+  },
+  "alignment": {
+    "toggleLabel": "Demander l'alignement",
+    "toggleDetail": "Recueillir le signal de l'équipe sur cette décision",
+    "votingWindow": "Fenêtre de vote",
+    "day_one": "{{count}} jour",
+    "day_other": "{{count}} jours"
+  },
+  "placeholders": [
+    {
+      "title": "On utilise Tailwind plutôt que styled-components",
+      "context": "Prototypage plus rapide, l'équipe connaît déjà, bundle plus léger"
+    },
+    {
+      "title": "La pagination de l'API utilisera des curseurs, pas des offsets",
+      "context": "Meilleures performances à l'échelle, pas d'éléments sautés quand les données changent"
+    },
+    {
+      "title": "Une checklist d'onboarding remplace la visite guidée",
+      "context": "Peu de gens terminaient la visite. La checklist leur laisse avancer à leur rythme"
+    },
+    {
+      "title": "Design mobile-first pour toutes les nouvelles pages",
+      "context": "La majorité du trafic est mobile, et le desktop s'adapte plus facilement que l'inverse"
+    },
+    {
+      "title": "Pas de date picker custom, on utilise l'input natif",
+      "context": "Économise deux semaines de travail, les pickers natifs suffisent maintenant"
+    },
+    {
+      "title": "La page tarifs affiche la facturation annuelle par défaut",
+      "context": "La plupart des clients choisissent l'annuel, le mensuel reste à un clic"
+    },
+    {
+      "title": "Livrer chaque semaine plutôt que toutes les deux semaines",
+      "context": "Releases plus petites, retours plus rapides, rollbacks plus faciles"
+    },
+    {
+      "title": "Les design tokens vivent en propriétés CSS",
+      "context": "Pas de coût à l'exécution, pas de flash sans style, theming plus simple"
+    }
+  ]
+}

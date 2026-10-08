@@ -1,0 +1,16 @@
+{
+  "actions": {
+    "confirm": "Confirmer",
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "working": "En cours…",
+    "remove": "Retirer {{name}}",
+    "typeToConfirm": "Saisissez {{value}} pour confirmer"
+  },
+  "mentions": {
+    "listLabel": "Personnes à mentionner",
+    "everyone": "Toute la room",
+    "count_one": "{{count}} personne correspond. Utilisez les flèches, puis Entrée pour l'insérer.",
+    "count_other": "{{count}} personnes correspondent. Utilisez les flèches, puis Entrée pour insérer."
+  }
+}

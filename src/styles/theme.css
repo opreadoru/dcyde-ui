@@ -1,0 +1,146 @@
+/*
+  Tailwind setup. This is the only stylesheet an app needs to import.
+
+  The default Tailwind palette is switched off, so a class like bg-violet-800
+  does not exist. The only colors available are the semantic ones below,
+  which read from tokens.css and follow the light or dark theme.
+*/
+
+@import "tailwindcss";
+@import "./tokens.css";
+@import "./base.css" layer(base);
+
+/* Built Storybook output is not source code */
+@source not "../../storybook-static";
+
+/* Values that are the same in both themes */
+@theme {
+  --color-*: initial;
+  --shadow-*: initial;
+  --radius-*: initial;
+  --ease-*: initial;
+  --text-*: initial;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --text-2xs: 0.625rem; /* 10px, avatar initials only */
+  --text-2xs--line-height: 1;
+  --text-xs: 0.75rem; /* 12px */
+  --text-xs--line-height: 1.4;
+  --text-sm: 0.8125rem; /* 13px */
+  --text-sm--line-height: 1.45;
+  --text-md: 0.875rem; /* 14px */
+  --text-md--line-height: 1.5;
+  --text-base: 0.9375rem; /* 15px */
+  --text-base--line-height: 1.6;
+  --text-lg: 1.0625rem; /* 17px */
+  --text-lg--line-height: 1.4;
+  --text-xl: 1.25rem; /* 20px */
+  --text-xl--line-height: 1.3;
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+
+  --ease-standard: ease;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+  /* animate-* (durations come from tokens.css, so reduced motion turns them off) */
+  --animate-rise-in: rise-in var(--duration-base) var(--ease-out);
+  --animate-shimmer: shimmer 1.5s ease-in-out infinite;
+
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+  }
+
+  @keyframes shimmer {
+    from {
+      background-position: -400px 0;
+    }
+    to {
+      background-position: 400px 0;
+    }
+  }
+}
+
+/*
+  Semantic classes. "inline" makes each class read the token where it is used,
+  so a dark section inside a light page gets dark values.
+*/
+@theme inline {
+  /* bg-* */
+  --background-color-page: var(--color-bg);
+  --background-color-surface: var(--color-surface);
+  --background-color-sunken: var(--color-surface-sunken);
+  --background-color-raised: var(--color-surface-raised);
+  --background-color-hover: var(--color-surface-hover);
+  --background-color-overlay: var(--color-overlay);
+  --background-color-accent: var(--color-accent-solid);
+  --background-color-accent-hover: var(--color-accent-solid-hover);
+  --background-color-accent-subtle: var(--color-accent-subtle);
+  --background-color-danger: var(--color-danger-solid);
+  --background-color-danger-subtle: var(--color-danger-subtle);
+  --background-color-success-subtle: var(--color-success-subtle);
+  --background-color-highlight: var(--color-highlight);
+  --background-color-rail: var(--color-rail);
+  --background-color-rail-hover: var(--color-rail-hover);
+  --background-color-tag-1: var(--color-tag-1);
+  --background-color-tag-2: var(--color-tag-2);
+  --background-color-tag-3: var(--color-tag-3);
+  --background-color-tag-4: var(--color-tag-4);
+  --background-color-tag-5: var(--color-tag-5);
+  --background-color-priority-low: var(--color-priority-low);
+  --background-color-priority-medium: var(--color-priority-medium);
+  --background-color-priority-high: var(--color-priority-high);
+  --background-color-avatar-1: var(--color-avatar-1);
+  --background-color-avatar-2: var(--color-avatar-2);
+  --background-color-avatar-3: var(--color-avatar-3);
+  --background-color-avatar-4: var(--color-avatar-4);
+  --background-color-vote-aligned: var(--color-vote-aligned);
+  --background-color-vote-not: var(--color-vote-not);
+  --background-color-vote-abstain: var(--color-vote-abstain);
+  --background-color-border-strong: var(--color-border-strong);
+  --background-color-input: var(--color-border-input);
+  --background-color-on-solid: var(--color-text-on-solid);
+
+  /* text-* */
+  --text-color-primary: var(--color-text);
+  --text-color-secondary: var(--color-text-secondary);
+  --text-color-muted: var(--color-text-muted);
+  --text-color-on-solid: var(--color-text-on-solid);
+  --text-color-accent: var(--color-accent);
+  --text-color-accent-subtle: var(--color-accent-subtle-text);
+  --text-color-danger: var(--color-danger);
+  --text-color-success: var(--color-success);
+  --text-color-highlight: var(--color-highlight-text);
+  --text-color-favorite: var(--color-favorite);
+  --text-color-rail: var(--color-rail-icon);
+  --text-color-rail-hover: var(--color-rail-icon-hover);
+  --text-color-rail-favorite: var(--color-rail-favorite);
+  --text-color-rail-pinned: var(--color-rail-pinned);
+  --text-color-rail-following: var(--color-rail-following);
+
+  /* border-* */
+  --border-color-default: var(--color-border);
+  --border-color-strong: var(--color-border-strong);
+  --border-color-input: var(--color-border-input);
+  --border-color-accent: var(--color-accent);
+  --border-color-danger: var(--color-danger);
+  --border-color-success: var(--color-success);
+  --border-color-highlight: var(--color-highlight);
+  --border-color-favorite: var(--color-favorite);
+
+  /* outline-* */
+  --outline-color-focus: var(--color-focus-ring);
+  --outline-color-on-solid: var(--color-text-on-solid);
+
+  /* shadow-* */
+  --shadow-sm: var(--elevation-sm);
+  --shadow-md: var(--elevation-md);
+  --shadow-lg: var(--elevation-lg);
+}

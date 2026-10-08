@@ -1,0 +1,41 @@
+{
+  "buttons": {
+    "filter": "Filtres",
+    "searchLabel": "Rechercher des décisions",
+    "searchPlaceholder": "Rechercher des décisions…",
+    "clearSearch": "Effacer la recherche",
+    "clearAll": "Tout effacer",
+    "resetAll": "Réinitialiser",
+    "apply": "Appliquer",
+    "removeFilter": "Retirer le filtre : {{name}}",
+    "activeCount_one": "{{count}} filtre actif",
+    "activeCount_other": "{{count}} filtres actifs"
+  },
+  "panel": {
+    "title": "Filtres",
+    "scopes": "Scopes",
+    "type": "Type",
+    "date": "Date",
+    "authors": "Auteurs",
+    "close": "Fermer les filtres"
+  },
+  "type": {
+    "alignment": "Alignement"
+  },
+  "date": {
+    "allTime": "Tout",
+    "last7Days": "7 derniers jours",
+    "last2Weeks": "2 dernières semaines",
+    "last30Days": "30 derniers jours",
+    "last3Months": "3 derniers mois",
+    "customRange": "Plage personnalisée",
+    "customLabel": "Personnalisé",
+    "from": "Du",
+    "to": "Au",
+    "applyRange": "Appliquer la plage"
+  },
+  "iconTitles": {
+    "showFavoritesOnly": "Afficher uniquement les favoris",
+    "following": "Suivis"
+  }
+}

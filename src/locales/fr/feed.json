@@ -1,0 +1,79 @@
+{
+  "loading": "Chargement des décisions",
+  "loadingMore": "Chargement…",
+  "empty": {
+    "noDecisions": {
+      "heading": "Aucune décision pour le moment",
+      "subtext": "Les décisions enregistrées par votre équipe apparaîtront ici."
+    },
+    "noFavorites": {
+      "heading": "Aucun favori pour le moment",
+      "subtext": "Utilisez le cœur sur une décision pour la garder ici."
+    },
+    "noResults": {
+      "heading": "Aucune décision ne correspond",
+      "subtext": "Essayez d'autres mots-clés ou retirez un filtre."
+    }
+  },
+  "timeGroup": {
+    "earlier": "Plus tôt",
+    "important": "Important"
+  },
+  "favoritesActive": "Favoris uniquement",
+  "showAllDecisions": "Tout afficher",
+  "markAllRead": "Tout marquer comme lu ({{count}})",
+  "loadMore": "Charger plus",
+  "showMore": "Voir plus ({{count}} restants)",
+  "card": {
+    "unknownAuthor": "Inconnu",
+    "edited": "modifié",
+    "voteNeeded": "Voter",
+    "showDetails": "Afficher les détails",
+    "hideDetails": "Masquer les détails",
+    "actionsLabel": "Actions sur la décision",
+    "tagsLabel": "Scopes",
+    "sourceLabel": "Source",
+    "responsible": "Référents",
+    "linksLabel": "Liens",
+    "alignmentLabel": "Alignement",
+    "sentFrom": "Envoyé depuis {{source}}",
+    "alignment": {
+      "aligned": "Aligné",
+      "notAligned": "Pas aligné",
+      "votingClosed": "Vote clôturé",
+      "waiting": "En attente de l'équipe ({{voted}}/{{eligible}} ont voté)",
+      "alignedCount": "{{count}} alignés",
+      "notAlignedCount": "{{count}} pas alignés"
+    },
+    "actions": {
+      "copyLink": "Copier le lien",
+      "linkCopied": "Lien copié",
+      "editDecision": "Modifier la décision",
+      "deleteDecision": "Supprimer la décision",
+      "follow": "Suivre {{name}}",
+      "favorite": "Favori",
+      "pin": "Épingler en haut"
+    },
+    "sources": {
+      "figmaPage": "Page Figma",
+      "figmaFile": "Fichier Figma"
+    },
+    "deleteModal": {
+      "title": "Supprimer la décision",
+      "message": "« {{title}} » sera supprimée pour tous les membres de la room. Cette action est irréversible.",
+      "confirm": "Supprimer"
+    },
+    "unread": "Non lu",
+    "pinned": "Épinglé",
+    "scopeTooltip": {
+      "follow": "Suivre",
+      "unfollow": "Ne plus suivre"
+    }
+  },
+  "error": {
+    "heading": "Les décisions n'ont pas pu être chargées",
+    "subtext": "Vérifiez votre connexion et réessayez.",
+    "retry": "Réessayer"
+  },
+  "feedLabel": "Décisions"
+}
