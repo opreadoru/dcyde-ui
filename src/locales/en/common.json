@@ -3,7 +3,7 @@
     "confirm": "Confirm",
     "cancel": "Cancel",
     "close": "Close",
-    "working": "Working...",
+    "working": "Working…",
     "remove": "Remove {{name}}",
     "typeToConfirm": "Type {{value}} to confirm"
   },

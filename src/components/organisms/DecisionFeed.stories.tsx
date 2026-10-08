@@ -2,6 +2,11 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
 import DecisionFeed from "./DecisionFeed";
 import type { Decision, Member } from "../../types";
+import i18n from "../../i18n";
+import { timeGroupLabel } from "../../lib/dates";
+
+// Names come from the locale files, so the tests pass in every language.
+const t = i18n.t.bind(i18n);
 
 const MEMBERS: Member[] = [
   { uid: "u1", displayName: "Priya Nair" },
@@ -102,7 +107,7 @@ export const WithUnread: Story = { args: { unreadIds: new Set(["d1", "d2"]), onM
 export const Loading: Story = {
   args: { loading: true },
   play: async ({ canvasElement }) => {
-    const status = within(canvasElement).getByText("Loading decisions");
+    const status = within(canvasElement).getByText(t("feed:loading"));
     await expect(status).toHaveAttribute("role", "status");
     await expect(status.parentElement).toHaveAttribute("aria-busy", "true");
   },
@@ -112,7 +117,7 @@ export const Error: Story = {
   args: { error: true, onRetry: fn() },
   play: async ({ canvasElement, args }) => {
     const alert = within(canvasElement).getByRole("alert");
-    await userEvent.click(within(alert).getByRole("button", { name: "Try again" }));
+    await userEvent.click(within(alert).getByRole("button", { name: t("feed:error.retry") }));
     await expect(args.onRetry).toHaveBeenCalledOnce();
   },
 };
@@ -139,7 +144,13 @@ export const Structure: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const groups = canvas.getAllByRole("heading", { level: 2 }).map((h) => h.textContent);
-    await expect(groups).toEqual(["Important", "Today", "Yesterday", "Last week", "Earlier"]);
+    await expect(groups).toEqual([
+      t("feed:timeGroup.important"),
+      timeGroupLabel("today", i18n.language),
+      timeGroupLabel("yesterday", i18n.language),
+      timeGroupLabel("lastWeek", i18n.language),
+      t("feed:timeGroup.earlier"),
+    ]);
     const feedLists = canvas.getAllByRole("list").filter((list) => !list.closest("article"));
     await expect(feedLists).toHaveLength(5);
     await expect(canvas.getAllByRole("article")).toHaveLength(5);

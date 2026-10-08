@@ -3,6 +3,10 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, screen, userEvent, waitFor, within } from "storybook/test";
 import ConfirmModal, { type ConfirmModalProps } from "./ConfirmModal";
 import Button from "../atoms/Button";
+import i18n from "../../i18n";
+
+// Names come from the locale files, so the tests pass in every language.
+const t = i18n.t.bind(i18n);
 
 /** A trigger button plus the modal, so stories can test where focus goes. */
 function Demo(args: ConfirmModalProps) {
@@ -61,7 +65,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   play: async () => {
     const dialog = await openDialog();
-    await expect(within(dialog).getByRole("button", { name: "Cancel" })).toHaveFocus();
+    await expect(within(dialog).getByRole("button", { name: t("common:actions.cancel") })).toHaveFocus();
   },
 };
 
@@ -88,9 +92,9 @@ export const TypedConfirmation: Story = {
   },
   play: async ({ args }) => {
     const dialog = await openDialog();
-    const input = within(dialog).getByRole("textbox", { name: "Type Mobile Platform to confirm" });
+    const input = within(dialog).getByRole("textbox", { name: t("common:actions.typeToConfirm", { value: "Mobile Platform" }) });
     const confirm = within(dialog).getByRole("button", { name: "Delete room" });
-    await expect(input).toHaveFocus();
+    await waitFor(() => expect(input).toHaveFocus());
     await expect(confirm).toBeDisabled();
     await userEvent.type(input, "Mobile Platform");
     await expect(confirm).toBeEnabled();
@@ -103,7 +107,7 @@ export const Loading: Story = {
   args: { loading: true },
   play: async () => {
     const dialog = await openDialog();
-    await expect(within(dialog).getByRole("button", { name: "Working..." })).toBeDisabled();
+    await expect(within(dialog).getByRole("button", { name: t("common:actions.working") })).toBeDisabled();
   },
 };
 
@@ -131,7 +135,7 @@ export const KeyboardFlow: Story = {
     await userEvent.keyboard("{Enter}");
 
     const dialog = await screen.findByRole("alertdialog");
-    const cancel = within(dialog).getByRole("button", { name: "Cancel" });
+    const cancel = within(dialog).getByRole("button", { name: t("common:actions.cancel") });
     const confirm = within(dialog).getByRole("button", { name: "Archive" });
     await waitFor(() => expect(cancel).toHaveFocus());
 

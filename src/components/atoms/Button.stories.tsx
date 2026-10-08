@@ -27,7 +27,7 @@ export const Small: Story = { args: { variant: "primary", size: "sm", children: 
 export const Disabled: Story = { args: { variant: "primary", disabled: true } };
 
 export const Loading: Story = {
-  args: { variant: "primary", loading: true, loadingLabel: "Saving..." },
+  args: { variant: "primary", loading: true, loadingLabel: "Saving…" },
   play: async ({ canvasElement, args }) => {
     const button = within(canvasElement).getByRole("button");
     await expect(button).toBeDisabled();

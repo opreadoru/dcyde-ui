@@ -2,6 +2,10 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, screen, userEvent, waitFor, within } from "storybook/test";
 import DecisionPin from "./DecisionPin";
 import type { Decision, Member } from "../../types";
+import i18n from "../../i18n";
+
+// Names come from the locale files, so the tests pass in every language.
+const t = i18n.t.bind(i18n);
 
 const MEMBERS: Member[] = [
   { uid: "u1", displayName: "Priya Nair" },
@@ -115,7 +119,7 @@ export const VoteResults: Story = {
     },
   },
   play: async ({ canvasElement }) => {
-    await userEvent.click(within(canvasElement).getByRole("button", { name: "Show details" }));
+    await userEvent.click(within(canvasElement).getByRole("button", { name: t("feed:card.showDetails") }));
   },
 };
 
@@ -144,7 +148,7 @@ export const French: Story = {
 export const KeyboardFlow: Story = {
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
-    const toggle = canvas.getByRole("button", { name: "Show details" });
+    const toggle = canvas.getByRole("button", { name: t("feed:card.showDetails") });
     const firstScope = canvas.getByRole("button", { name: /Design/ });
 
     // Closed: the scope buttons are inert and out of the Tab order
@@ -163,8 +167,8 @@ export const KeyboardFlow: Story = {
     await expect(args.onFollowScope).toHaveBeenCalledWith("Design", true);
 
     await userEvent.keyboard("{Escape}");
-    await expect(canvas.getByRole("button", { name: "Show details" })).toHaveFocus();
-    await expect(canvas.getByRole("button", { name: "Show details" })).toHaveAttribute("aria-expanded", "false");
+    await expect(canvas.getByRole("button", { name: t("feed:card.showDetails") })).toHaveFocus();
+    await expect(canvas.getByRole("button", { name: t("feed:card.showDetails") })).toHaveAttribute("aria-expanded", "false");
   },
 };
 
@@ -172,11 +176,11 @@ export const KeyboardFlow: Story = {
 export const DeleteFlow: Story = {
   args: { currentUserId: "u2", canEdit: true, canDelete: true },
   play: async ({ canvasElement, args }) => {
-    const deleteButton = within(canvasElement).getByRole("button", { name: "Delete decision" });
+    const deleteButton = within(canvasElement).getByRole("button", { name: t("feed:card.actions.deleteDecision") });
     await userEvent.click(deleteButton);
-    const dialog = await screen.findByRole("alertdialog", { name: "Delete decision" });
-    await expect(dialog).toHaveTextContent("will be removed for everyone in the room");
-    await userEvent.click(within(dialog).getByRole("button", { name: "Cancel" }));
+    const dialog = await screen.findByRole("alertdialog", { name: t("feed:card.deleteModal.title") });
+    await expect(dialog).toHaveTextContent(t("feed:card.deleteModal.message", { title: RICH.title }));
+    await userEvent.click(within(dialog).getByRole("button", { name: t("common:actions.cancel") }));
     await waitFor(() => expect(deleteButton).toHaveFocus());
     await expect(args.onDelete).not.toHaveBeenCalled();
   },

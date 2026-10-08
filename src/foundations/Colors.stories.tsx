@@ -97,7 +97,7 @@ function ThemePanel({ theme }: { theme: "light" | "dark" }) {
 
       <h3 className="mt-6 mb-2 text-xs font-bold tracking-wider text-muted uppercase">Contrast</h3>
       <p className="mb-2">
-        {ratios.length === 0 ? "Measuring..." : failures === 0 ? `All ${PAIRS.length} pairs pass.` : `${failures} pairs fail.`}
+        {ratios.length === 0 ? "Measuring…" : failures === 0 ? `All ${PAIRS.length} pairs pass.` : `${failures} pairs fail.`}
       </p>
       <div className="overflow-x-auto">
         <table className="w-full border-collapse text-xs">

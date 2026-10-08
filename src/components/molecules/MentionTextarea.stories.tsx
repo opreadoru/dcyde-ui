@@ -3,6 +3,10 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, waitFor, within } from "storybook/test";
 import MentionTextarea, { type MentionTextareaProps } from "./MentionTextarea";
 import type { Member } from "../../types";
+import i18n from "../../i18n";
+
+// Names come from the locale files, so the tests pass in every language.
+const t = i18n.t.bind(i18n);
 
 const MEMBERS: Member[] = [
   { uid: "u1", displayName: "Priya Nair" },
@@ -68,7 +72,7 @@ export const SuggestionsOpen: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await userEvent.type(canvas.getByRole("textbox", { name: "Context" }), "Ask @");
-    await expect(await canvas.findByRole("listbox", { name: "People to mention" })).toBeVisible();
+    await expect(await canvas.findByRole("listbox", { name: t("common:mentions.listLabel") })).toBeVisible();
   },
 };
 
@@ -102,7 +106,7 @@ export const KeyboardFlow: Story = {
     const options = await canvas.findAllByRole("option");
     // "all" first, then people in alphabetical order; Mara (the current user) is not offered
     await expect(options.map((o) => o.textContent)).toEqual([
-      "A@all Everyone in the room",
+      `A@all ${t("common:mentions.everyone")}`,
       "JJonas Berg",
       "LLéa Martin",
       "PPriya Nair",

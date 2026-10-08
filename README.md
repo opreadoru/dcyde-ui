@@ -33,7 +33,7 @@ See it live: [dcyde-ui.vercel.app](https://dcyde-ui.vercel.app)
 ```bash
 npm install
 npm run storybook   # opens Storybook on localhost:6006
-npm test            # runs every story in light and dark: keyboard flows plus an axe accessibility check
+npm test            # runs every story in light and dark, English and French: keyboard flows plus an axe accessibility check
 npm run lint        # TypeScript and jsx-a11y rules
 ```
 

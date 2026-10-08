@@ -3,6 +3,11 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, screen, userEvent, waitFor, within } from "storybook/test";
 import FilterChipBar, { type FilterChipBarProps } from "./FilterChipBar";
 import type { Author, DateRange } from "../../types";
+import i18n from "../../i18n";
+
+// Names come from the locale files, so the tests pass in every language.
+const t = i18n.t.bind(i18n);
+const filterButton = () => new RegExp(`^${t("filters:buttons.filter")}`);
 
 const AUTHORS: Author[] = [
   { uid: "u1", name: "Priya Nair" },
@@ -79,17 +84,17 @@ export const FavoritesOnly: Story = { args: { favoritesOnly: true } };
 export const PanelOpen: Story = {
   args: { activeFilters: new Set(["Design"]) },
   play: async ({ canvasElement }) => {
-    await userEvent.click(within(canvasElement).getByRole("button", { name: /Filter/ }));
-    await screen.findByRole("dialog", { name: "Filters" });
+    await userEvent.click(within(canvasElement).getByRole("button", { name: filterButton() }));
+    await screen.findByRole("dialog", { name: t("filters:panel.title") });
   },
 };
 
 export const NoAuthors: Story = {
   args: { authors: [] },
   play: async ({ canvasElement }) => {
-    await userEvent.click(within(canvasElement).getByRole("button", { name: /Filter/ }));
-    const panel = await screen.findByRole("dialog", { name: "Filters" });
-    await expect(within(panel).queryByRole("group", { name: "Authors" })).not.toBeInTheDocument();
+    await userEvent.click(within(canvasElement).getByRole("button", { name: filterButton() }));
+    const panel = await screen.findByRole("dialog", { name: t("filters:panel.title") });
+    await expect(within(panel).queryByRole("group", { name: t("filters:panel.authors") })).not.toBeInTheDocument();
   },
 };
 
@@ -114,12 +119,12 @@ export const French: Story = {
 export const KeyboardFlow: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const trigger = canvas.getByRole("button", { name: "Filter" });
+    const trigger = canvas.getByRole("button", { name: t("filters:buttons.filter") });
     await userEvent.tab();
     await expect(trigger).toHaveFocus();
     await userEvent.keyboard("{Enter}");
 
-    const panel = await screen.findByRole("dialog", { name: "Filters" });
+    const panel = await screen.findByRole("dialog", { name: t("filters:panel.title") });
     await waitFor(() => expect(panel.contains(document.activeElement)).toBe(true));
 
     const design = within(panel).getByRole("checkbox", { name: "Design" });
@@ -127,17 +132,17 @@ export const KeyboardFlow: Story = {
     await userEvent.keyboard(" ");
     await expect(design).toHaveAttribute("aria-checked", "true");
 
-    const allTime = within(panel).getByRole("radio", { name: "All time" });
+    const allTime = within(panel).getByRole("radio", { name: t("filters:date.allTime") });
     allTime.focus();
     await userEvent.keyboard("{ArrowDown}");
-    await expect(within(panel).getByRole("radio", { name: "Last 7 days" })).toHaveAttribute("aria-checked", "true");
+    await expect(within(panel).getByRole("radio", { name: t("filters:date.last7Days") })).toHaveAttribute("aria-checked", "true");
 
     await userEvent.keyboard("{Escape}");
-    await waitFor(() => expect(screen.queryByRole("dialog", { name: "Filters" })).not.toBeInTheDocument());
-    await waitFor(() => expect(canvas.getByRole("button", { name: /^Filter/ })).toHaveFocus());
+    await waitFor(() => expect(screen.queryByRole("dialog", { name: t("filters:panel.title") })).not.toBeInTheDocument());
+    await waitFor(() => expect(canvas.getByRole("button", { name: filterButton() })).toHaveFocus());
 
-    await expect(canvas.getByRole("button", { name: "Remove filter: Design" })).toBeVisible();
-    await expect(canvas.getByRole("button", { name: "Remove filter: Last 7 days" })).toBeVisible();
+    await expect(canvas.getByRole("button", { name: t("filters:buttons.removeFilter", { name: "Design" }) })).toBeVisible();
+    await expect(canvas.getByRole("button", { name: t("filters:buttons.removeFilter", { name: t("filters:date.last7Days") }) })).toBeVisible();
   },
 };
 
@@ -146,8 +151,8 @@ export const RemoveChip: Story = {
   args: { activeFilters: new Set(["Design", "Process"]) },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await userEvent.click(canvas.getByRole("button", { name: "Remove filter: Design" }));
-    await expect(canvas.queryByRole("button", { name: "Remove filter: Design" })).not.toBeInTheDocument();
-    await expect(canvas.getByRole("button", { name: "Remove filter: Process" })).toBeVisible();
+    await userEvent.click(canvas.getByRole("button", { name: t("filters:buttons.removeFilter", { name: "Design" }) }));
+    await expect(canvas.queryByRole("button", { name: t("filters:buttons.removeFilter", { name: "Design" }) })).not.toBeInTheDocument();
+    await expect(canvas.getByRole("button", { name: t("filters:buttons.removeFilter", { name: "Process" }) })).toBeVisible();
   },
 };

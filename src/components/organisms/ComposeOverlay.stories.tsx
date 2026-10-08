@@ -5,6 +5,11 @@ import ComposeOverlay, { type ComposeOverlayProps } from "./ComposeOverlay";
 import IconButton from "../atoms/IconButton";
 import { PlusIcon } from "../../lib/icons";
 import type { Decision, Member } from "../../types";
+import i18n from "../../i18n";
+
+// Names come from the locale files, so the tests pass in every language.
+const t = i18n.t.bind(i18n);
+const titleField = () => new RegExp(t("compose:fields.titleLabel"));
 
 const MEMBERS: Member[] = [
   { uid: "u1", displayName: "Priya Nair" },
@@ -46,7 +51,7 @@ function Demo(args: ComposeOverlayProps) {
 
 const openCompose = async () => {
   await userEvent.click(screen.getByRole("button", { name: "Add a decision" }));
-  const dialog = await screen.findByRole("dialog", { name: /decision/ });
+  const dialog = await screen.findByRole("dialog");
   // Wait for the open animation to finish before checking what is visible
   await waitFor(() => expect(dialog).not.toHaveAttribute("data-starting-style"));
   await waitFor(() => expect(getComputedStyle(dialog).opacity).toBe("1"));
@@ -82,7 +87,7 @@ type Story = StoryObj<typeof meta>;
 export const New: Story = {
   play: async () => {
     await openCompose();
-    await waitFor(() => expect(screen.getByRole("textbox", { name: /Title/ })).toHaveFocus());
+    await waitFor(() => expect(screen.getByRole("textbox", { name: titleField() })).toHaveFocus());
   },
 };
 
@@ -90,7 +95,7 @@ export const Edit: Story = {
   args: { initialData: EXISTING },
   play: async () => {
     const dialog = await openCompose();
-    await expect(within(dialog).getByRole("heading", { name: "Edit decision" })).toBeVisible();
+    await expect(within(dialog).getByRole("heading", { name: t("compose:header.editDecision") })).toBeVisible();
     await expect(within(dialog).queryByRole("switch")).not.toBeInTheDocument();
   },
 };
@@ -99,10 +104,10 @@ export const Edit: Story = {
 export const ValidationErrors: Story = {
   play: async ({ args }) => {
     const dialog = await openCompose();
-    await userEvent.click(within(dialog).getByRole("button", { name: "Post" }));
-    const title = within(dialog).getByRole("textbox", { name: /Title/ });
+    await userEvent.click(within(dialog).getByRole("button", { name: t("compose:header.post") }));
+    const title = within(dialog).getByRole("textbox", { name: titleField() });
     await expect(title).toHaveAttribute("aria-invalid", "true");
-    await expect(title).toHaveAccessibleDescription(/Add a title so the team can find this decision/);
+    await expect(title).toHaveAccessibleDescription(new RegExp(t("compose:fields.titleRequired")));
     await expect(title).toHaveFocus();
     await expect(args.onSubmit).not.toHaveBeenCalled();
   },
@@ -113,10 +118,10 @@ export const Sending: Story = {
   args: { initialData: EXISTING, onSubmit: fn(() => new Promise<void>(() => {})) },
   play: async () => {
     const dialog = await openCompose();
-    await userEvent.click(within(dialog).getByRole("button", { name: "Save changes" }));
-    await expect(await within(dialog).findByRole("button", { name: "Saving..." })).toBeDisabled();
+    await userEvent.click(within(dialog).getByRole("button", { name: t("compose:header.saveChanges") }));
+    await expect(await within(dialog).findByRole("button", { name: t("compose:header.saving") })).toBeDisabled();
     await userEvent.keyboard("{Escape}");
-    await expect(screen.getByRole("dialog", { name: "Edit decision" })).toBeVisible();
+    await expect(screen.getByRole("dialog", { name: t("compose:header.editDecision") })).toBeVisible();
   },
 };
 
@@ -125,9 +130,9 @@ export const SubmitFails: Story = {
   args: { initialData: EXISTING, onSubmit: fn(() => Promise.reject(new Error("offline"))) },
   play: async () => {
     const dialog = await openCompose();
-    await userEvent.click(within(dialog).getByRole("button", { name: "Save changes" }));
-    await expect(await within(dialog).findByRole("alert")).toHaveTextContent("The decision wasn't saved");
-    await expect(within(dialog).getByRole("textbox", { name: /Title/ })).toHaveValue(EXISTING.title);
+    await userEvent.click(within(dialog).getByRole("button", { name: t("compose:header.saveChanges") }));
+    await expect(await within(dialog).findByRole("alert")).toHaveTextContent(t("compose:submitError"));
+    await expect(within(dialog).getByRole("textbox", { name: titleField() })).toHaveValue(EXISTING.title);
   },
 };
 
@@ -135,9 +140,9 @@ export const LimitsReached: Story = {
   args: { initialData: { ...EXISTING, tags: ["Onboarding", "UX", "Copy"] }, maxScopes: 3, maxLinks: 1 },
   play: async () => {
     const dialog = await openCompose();
-    await expect(within(dialog).getByText("You can add up to 3 scopes.")).toBeVisible();
-    await expect(within(dialog).getByText("You can add up to 1 links.")).toBeVisible();
-    await expect(within(dialog).queryByRole("button", { name: "Add scope" })).not.toBeInTheDocument();
+    await expect(within(dialog).getByText(t("compose:fields.scopeLimit", { count: 3 }))).toBeVisible();
+    await expect(within(dialog).getByText(t("compose:fields.linkLimit", { count: 1 }))).toBeVisible();
+    await expect(within(dialog).queryByRole("button", { name: t("compose:fields.addScope") })).not.toBeInTheDocument();
   },
 };
 
@@ -145,7 +150,7 @@ export const French: Story = {
   globals: { locale: "fr" },
   play: async () => {
     await userEvent.click(screen.getByRole("button", { name: "Add a decision" }));
-    await screen.findByRole("dialog", { name: "Nouvelle décision" });
+    await screen.findByRole("dialog", { name: t("compose:header.newDecision") });
   },
 };
 
@@ -157,19 +162,19 @@ export const French: Story = {
 export const DiscardFlow: Story = {
   play: async ({ args }) => {
     const dialog = await openCompose();
-    const title = within(dialog).getByRole("textbox", { name: /Title/ });
+    const title = within(dialog).getByRole("textbox", { name: titleField() });
     await waitFor(() => expect(title).toHaveFocus());
     await userEvent.type(title, "Use cursors for pagination");
 
     await userEvent.keyboard("{Escape}");
-    const confirm = await screen.findByRole("alertdialog", { name: "Discard this draft?" });
-    await userEvent.click(within(confirm).getByRole("button", { name: "Keep editing" }));
+    const confirm = await screen.findByRole("alertdialog", { name: t("compose:discard.title") });
+    await userEvent.click(within(confirm).getByRole("button", { name: t("compose:discard.keep") }));
     await waitFor(() => expect(screen.queryByRole("alertdialog")).not.toBeInTheDocument());
     await expect(title).toHaveValue("Use cursors for pagination");
 
     title.focus();
     await userEvent.keyboard("{Escape}");
-    await userEvent.click(within(await screen.findByRole("alertdialog")).getByRole("button", { name: "Discard" }));
+    await userEvent.click(within(await screen.findByRole("alertdialog")).getByRole("button", { name: t("compose:discard.confirm") }));
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
     await expect(args.onOpenChange).toHaveBeenLastCalledWith(false);
     await waitFor(() => expect(screen.getByRole("button", { name: "Add a decision" })).toHaveFocus());
@@ -180,12 +185,12 @@ export const DiscardFlow: Story = {
 export const MentionInDialog: Story = {
   play: async () => {
     const dialog = await openCompose();
-    const context = within(dialog).getByRole("textbox", { name: /Context/ });
+    const context = within(dialog).getByRole("textbox", { name: new RegExp(t("compose:fields.contextLabel")) });
     await userEvent.type(context, "Owned by @pri");
     await within(dialog).findByRole("listbox");
     await userEvent.keyboard("{Escape}");
     await expect(within(dialog).queryByRole("listbox")).not.toBeInTheDocument();
-    await expect(screen.getByRole("dialog", { name: "New decision" })).toBeVisible();
+    await expect(screen.getByRole("dialog", { name: t("compose:header.newDecision") })).toBeVisible();
   },
 };
 
@@ -193,12 +198,12 @@ export const MentionInDialog: Story = {
 export const ScopePickerFlow: Story = {
   play: async () => {
     const dialog = await openCompose();
-    const add = within(dialog).getByRole("button", { name: "Add scope" });
+    const add = within(dialog).getByRole("button", { name: t("compose:fields.addScope") });
     await userEvent.click(add);
-    const picker = await screen.findByRole("dialog", { name: "Select scopes" });
-    await userEvent.type(within(picker).getByRole("textbox", { name: /Search or type a new scope/ }), "Pricing{Enter}");
-    await waitFor(() => expect(screen.queryByRole("dialog", { name: "Select scopes" })).not.toBeInTheDocument());
-    await expect(within(dialog).getByRole("button", { name: "Remove Pricing" })).toBeVisible();
-    await waitFor(() => expect(within(dialog).getByRole("button", { name: "Add scope" })).toHaveFocus());
+    const picker = await screen.findByRole("dialog", { name: t("compose:scopePicker.title") });
+    await userEvent.type(within(picker).getByRole("textbox", { name: t("compose:scopePicker.search") }), "Pricing{Enter}");
+    await waitFor(() => expect(screen.queryByRole("dialog", { name: t("compose:scopePicker.title") })).not.toBeInTheDocument());
+    await expect(within(dialog).getByRole("button", { name: t("common:actions.remove", { name: "Pricing" }) })).toBeVisible();
+    await waitFor(() => expect(within(dialog).getByRole("button", { name: t("compose:fields.addScope") })).toHaveFocus());
   },
 };

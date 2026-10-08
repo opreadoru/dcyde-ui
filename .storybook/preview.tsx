@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import type { Decorator, Preview } from "@storybook/react-vite";
 import i18n from "../src/i18n";
 import { ToastProvider } from "../src/lib/toast";
 import "../src/styles/theme.css";
 
 declare const __TEST_THEME__: "light" | "dark" | undefined;
+declare const __TEST_LOCALE__: "en" | "fr" | undefined;
 
 // Theme and language live on <html>, so dialogs and popovers that render
 // outside the story (in a portal) pick them up too.
@@ -12,11 +13,11 @@ const withThemeAndLocale: Decorator = (Story, context) => {
   const theme = context.globals.theme as "light" | "dark";
   const locale = context.globals.locale as "en" | "fr";
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.documentElement.setAttribute("lang", locale);
     i18n.changeLanguage(locale);
   }, [locale]);
@@ -56,11 +57,18 @@ const preview: Preview = {
     },
   },
   initialGlobals: {
-    // The test runner sets __TEST_THEME__ to run every story in both themes.
+    // The test runner sets these to run every story in both themes and both languages.
     theme: typeof __TEST_THEME__ === "undefined" ? "light" : __TEST_THEME__,
-    locale: "en",
+    locale: typeof __TEST_LOCALE__ === "undefined" ? "en" : __TEST_LOCALE__,
   },
   decorators: [withThemeAndLocale],
+  // Runs before every story renders, so its first paint and its play function
+  // already see the chosen theme and language.
+  beforeEach: async ({ globals }) => {
+    document.documentElement.setAttribute("data-theme", globals.theme);
+    document.documentElement.setAttribute("lang", globals.locale);
+    await i18n.changeLanguage(globals.locale);
+  },
   parameters: {
     layout: "padded",
     options: {
