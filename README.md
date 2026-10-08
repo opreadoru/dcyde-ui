@@ -1,3 +1,8 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".storybook/public/dcyde.svg">
+  <img src=".storybook/public/dcyde-light.svg" alt="Dcyde" width="160">
+</picture>
+
 # Dcyde UI
 
 Components from Dcyde, a decision log for product teams that I designed and built. Teams record what they decided and why, so the reasoning is still there months later.
@@ -31,3 +36,5 @@ npm run storybook   # opens Storybook on localhost:6006
 npm test            # runs every story in light and dark: keyboard flows plus an axe accessibility check
 npm run lint        # TypeScript and jsx-a11y rules
 ```
+
+Designed and built by [Alex Oprea](https://opreadoru.com). © 2026 Alex Oprea. All rights reserved.

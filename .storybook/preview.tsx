@@ -63,6 +63,9 @@ const preview: Preview = {
   decorators: [withThemeAndLocale],
   parameters: {
     layout: "padded",
+    options: {
+      storySort: { order: ["Foundations", "Atoms", "Molecules", "Organisms"] },
+    },
     backgrounds: { disable: true },
     controls: {
       matchers: {
