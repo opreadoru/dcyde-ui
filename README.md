@@ -9,7 +9,7 @@ Components from Dcyde, a decision log for product teams that I designed and buil
 
 Built with TypeScript, React 19, Base UI, Tailwind CSS 4 and Storybook.
 
-Live Storybook: link coming with the first published build.
+See it live: [dcyde-ui.vercel.app](https://dcyde-ui.vercel.app)
 
 ## The design idea
 
