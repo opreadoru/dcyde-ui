@@ -1,8 +1,8 @@
 # Dcyde UI
 
-Dcyde is decision memory for product teams. Teams record what they decided and why, so the reasoning is still there months later.
+Components from Dcyde, a decision log for product teams that I designed and built. Teams record what they decided and why, so the reasoning is still there months later.
 
-This repo holds the components behind the Dcyde decision feed, with a Storybook to browse them.
+Built with TypeScript, React 19, Base UI, Tailwind CSS 4 and Storybook.
 
 Live Storybook: link coming with the first published build.
 
@@ -31,5 +31,3 @@ npm run storybook   # opens Storybook on localhost:6006
 npm test            # runs every story in light and dark: keyboard flows plus an axe accessibility check
 npm run lint        # TypeScript and jsx-a11y rules
 ```
-
-Built with React 19, TypeScript, Tailwind CSS 4, Base UI and Storybook 10.

@@ -18,7 +18,6 @@ const storybookProject = (theme: "light" | "dark") => ({
       provider: playwright(),
       instances: [{ browser: "chromium" as const }],
     },
-    setupFiles: [".storybook/vitest.setup.ts"],
   },
 });
 
