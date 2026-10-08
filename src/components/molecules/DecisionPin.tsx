@@ -221,6 +221,9 @@ export default function DecisionPin({
 
   return (
     <>
+      {/* The click is a mouse shortcut. Keyboard and screen reader users open the card
+          with the "Show details" button, so the article itself needs no key handler. */}
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions */}
       <article
         ref={cardRef}
         aria-labelledby={titleId}

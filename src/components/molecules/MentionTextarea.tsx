@@ -98,7 +98,7 @@ export default function MentionTextarea({
 }: MentionTextareaProps) {
   const { t } = useTranslation();
   const ownRef = useRef<HTMLTextAreaElement>(null);
-  const listRef = useRef<HTMLUListElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
   const listId = useId();
   const [mention, setMention] = useState<Mention | null>(null);
   const [active, setActive] = useState(0);
@@ -202,7 +202,7 @@ export default function MentionTextarea({
       />
 
       {open && (
-        <ul
+        <div
           ref={listRef}
           id={listId}
           role="listbox"
@@ -211,11 +211,13 @@ export default function MentionTextarea({
           className="absolute z-(--z-popover) max-h-64 w-65 overflow-y-auto rounded-md border border-strong bg-raised py-1 shadow-lg"
         >
           {suggestions.map((s, i) => (
-            <li
+            <div
               key={s.uid}
               id={optionId(i)}
               role="option"
               aria-selected={i === active}
+              // Focus stays in the textarea (aria-activedescendant), so options are never tabbed to
+              tabIndex={-1}
               // mousedown, not click: keeps focus in the textarea
               onMouseDown={(e) => {
                 e.preventDefault();
@@ -237,9 +239,9 @@ export default function MentionTextarea({
                   s.displayName
                 )}
               </span>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
 
       <span className="sr-only" role="status" aria-live="polite">
