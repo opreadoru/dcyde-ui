@@ -5,28 +5,16 @@
 
 # Dcyde UI
 
-Components from Dcyde, a decision log for product teams that I designed and built. Teams record what they decided and why, so the reasoning is still there months later.
-
-Built with TypeScript, React 19, Base UI, Tailwind CSS 4 and Storybook.
+A component library based on Dcyde's decision feed. Dcyde is a decision log for product teams that I designed and built.
 
 See it live: [dcyde-ui.vercel.app](https://dcyde-ui.vercel.app)
 
-## The design idea
+Built with TypeScript, React 19, Base UI, Tailwind CSS 4 and Storybook.
 
-- **Tokens first.** Components use semantic tokens only (`bg-surface`, `text-muted`, `border-input`). The default Tailwind palette is switched off, so a raw color can't slip in. Light and dark come from the same tokens.
-- **Accessible by default.** Dialogs, the switch, the filter popover, checkboxes and radios are built on [Base UI](https://base-ui.com). Focus is trapped where it should be and returns where it came from. Every text and control color meets WCAG AA, and the Colors page measures it live.
-- **All the states.** Stories cover loading, empty, error, disabled, long text and French copy.
-- **Reduced motion.** Durations and easings are tokens. With reduced motion turned on, nothing moves.
-- **Dates in the reader's language.** Dates and group names come from `Intl.DateTimeFormat` and `Intl.RelativeTimeFormat`.
+## Two decisions
 
-## What's inside
-
-| Level | Components |
-| --- | --- |
-| Foundations | Colors, Typography, Spacing, Motion |
-| Atoms | Avatar, Badge, Button, IconButton, TagDot, TimeGroupLabel, ToggleSwitch |
-| Molecules | ConfirmModal, DecisionPin, FilterChipBar, MentionTextarea |
-| Organisms | ComposeOverlay, DecisionFeed |
+- The default Tailwind palette is switched off. Components can only use the semantic tokens, so a raw color can't slip in.
+- Base UI where it fits, plain code where it doesn't. Dialogs, popovers and form controls use Base UI. The mention field is custom, because Base UI has no pattern for mentions in a textarea. "Show details" on a decision is a plain button with `aria-expanded`, because one disclosure didn't need a library part.
 
 ## Run it
 
